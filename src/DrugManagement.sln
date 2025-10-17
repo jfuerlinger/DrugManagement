@@ -1,0 +1,125 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36429.23 d17.14
+MinimumVisualStudioVersion = 17.8.0.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{5A8CED81-CE4E-4A3D-9232-377551D9F96A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4D5C586A-1F82-47DD-A33E-E7572455D2AF}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DrugManagement.Frontend", "Frontend\DrugManagement.Frontend\", "{C07755ED-E4D6-8CAE-B063-595FD296EC29}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_54130"
+		Debug.AspNetCompiler.PhysicalPath = "Frontend\DrugManagement.Frontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54130\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_54130"
+		Release.AspNetCompiler.PhysicalPath = "Frontend\DrugManagement.Frontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54130\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "54130"
+		SlnRelativePath = "Frontend\DrugManagement.Frontend\"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workers", "Workers", "{7BC10692-C4FA-4F66-9F61-9EFCAF90E614}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{93E565C9-8303-4BD7-B1E6-3992AC0D8D72}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugManagement.ApiService", "Backend\DrugManagement.ApiService\DrugManagement.ApiService.csproj", "{1E4D62FF-DE03-49E9-8FE7-B89788AEC593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugManagement.D365Service", "Backend\DrugManagement.D365Service\DrugManagement.D365Service.csproj", "{B7731347-040B-4C2E-8802-ADBCA05D8FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugManagement.AppHost", "Infrastructure\DrugManagement.AppHost\DrugManagement.AppHost.csproj", "{FF6F3363-60F5-40EC-97F1-CF1F781DB699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugManagement.AppHost.Tests", "Infrastructure\DrugManagement.AppHost.Tests\DrugManagement.AppHost.Tests.csproj", "{37125BD9-B07E-4424-B4C3-70B50896785C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugManagement.Core", "Infrastructure\DrugManagement.Core\DrugManagement.Core.csproj", "{F71A8B80-8220-4CF9-A6D9-8B25F514DF9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugManagement.ServiceDefaults", "Infrastructure\DrugManagement.ServiceDefaults\DrugManagement.ServiceDefaults.csproj", "{E9D75D6C-A8B5-498D-986C-49D8E6CD22DD}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DrugManagement.Shared", "Infrastructure\DrugManagement.Shared\DrugManagement.Shared.shproj", "{CC5F4DAC-C31A-4030-8706-0573EE52B0F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugManagement.MigrationWorker", "Workers\DrugManagement.MigrationWorker\DrugManagement.MigrationWorker.csproj", "{04546B00-FBF3-4807-9AC4-50A96815D0DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{BDDC71FE-2969-4821-B9FA-A214944A58D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C07755ED-E4D6-8CAE-B063-595FD296EC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C07755ED-E4D6-8CAE-B063-595FD296EC29}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{C07755ED-E4D6-8CAE-B063-595FD296EC29}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{1E4D62FF-DE03-49E9-8FE7-B89788AEC593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E4D62FF-DE03-49E9-8FE7-B89788AEC593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E4D62FF-DE03-49E9-8FE7-B89788AEC593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E4D62FF-DE03-49E9-8FE7-B89788AEC593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7731347-040B-4C2E-8802-ADBCA05D8FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7731347-040B-4C2E-8802-ADBCA05D8FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7731347-040B-4C2E-8802-ADBCA05D8FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7731347-040B-4C2E-8802-ADBCA05D8FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF6F3363-60F5-40EC-97F1-CF1F781DB699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF6F3363-60F5-40EC-97F1-CF1F781DB699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF6F3363-60F5-40EC-97F1-CF1F781DB699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF6F3363-60F5-40EC-97F1-CF1F781DB699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37125BD9-B07E-4424-B4C3-70B50896785C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37125BD9-B07E-4424-B4C3-70B50896785C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37125BD9-B07E-4424-B4C3-70B50896785C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37125BD9-B07E-4424-B4C3-70B50896785C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F71A8B80-8220-4CF9-A6D9-8B25F514DF9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F71A8B80-8220-4CF9-A6D9-8B25F514DF9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F71A8B80-8220-4CF9-A6D9-8B25F514DF9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F71A8B80-8220-4CF9-A6D9-8B25F514DF9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9D75D6C-A8B5-498D-986C-49D8E6CD22DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D75D6C-A8B5-498D-986C-49D8E6CD22DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D75D6C-A8B5-498D-986C-49D8E6CD22DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D75D6C-A8B5-498D-986C-49D8E6CD22DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04546B00-FBF3-4807-9AC4-50A96815D0DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04546B00-FBF3-4807-9AC4-50A96815D0DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04546B00-FBF3-4807-9AC4-50A96815D0DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04546B00-FBF3-4807-9AC4-50A96815D0DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E4D62FF-DE03-49E9-8FE7-B89788AEC593} = {5A8CED81-CE4E-4A3D-9232-377551D9F96A}
+		{B7731347-040B-4C2E-8802-ADBCA05D8FCF} = {5A8CED81-CE4E-4A3D-9232-377551D9F96A}
+		{FF6F3363-60F5-40EC-97F1-CF1F781DB699} = {4D5C586A-1F82-47DD-A33E-E7572455D2AF}
+		{37125BD9-B07E-4424-B4C3-70B50896785C} = {4D5C586A-1F82-47DD-A33E-E7572455D2AF}
+		{F71A8B80-8220-4CF9-A6D9-8B25F514DF9E} = {4D5C586A-1F82-47DD-A33E-E7572455D2AF}
+		{E9D75D6C-A8B5-498D-986C-49D8E6CD22DD} = {4D5C586A-1F82-47DD-A33E-E7572455D2AF}
+		{CC5F4DAC-C31A-4030-8706-0573EE52B0F4} = {4D5C586A-1F82-47DD-A33E-E7572455D2AF}
+		{04546B00-FBF3-4807-9AC4-50A96815D0DB} = {7BC10692-C4FA-4F66-9F61-9EFCAF90E614}
+		{C07755ED-E4D6-8CAE-B063-595FD296EC29} = {BDDC71FE-2969-4821-B9FA-A214944A58D2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0823C583-E3BB-4038-BB55-83F34ABC1B3E}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Infrastructure\DrugManagement.Shared\DrugManagement.Shared.projitems*{4450ce6e-f2be-f642-2b8b-672c5417a9a1}*SharedItemsImports = 5
+		Infrastructure\DrugManagement.Shared\DrugManagement.Shared.projitems*{52512e4d-81cf-d784-1263-3506e0088c46}*SharedItemsImports = 5
+		Infrastructure\DrugManagement.Shared\DrugManagement.Shared.projitems*{a3750c48-d7aa-4380-0c52-dc5bcc8d8adb}*SharedItemsImports = 5
+		Infrastructure\DrugManagement.Shared\DrugManagement.Shared.projitems*{a7b60915-2e65-d64e-08d1-207d7a0e66c7}*SharedItemsImports = 5
+		Infrastructure\DrugManagement.Shared\DrugManagement.Shared.projitems*{cc5f4dac-c31a-4030-8706-0573ee52b0f4}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal

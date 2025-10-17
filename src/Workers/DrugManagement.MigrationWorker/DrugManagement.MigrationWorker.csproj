@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <UserSecretsId>dotnet-DrugManagement.MigrationWorker-baa6fc25-fe58-4ca0-b4b9-4296e644978e</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>..\..</DockerfileContext>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+        <PackageReference Include="EFCore.BulkExtensions" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" />
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Infrastructure\DrugManagement.Core\DrugManagement.Core.csproj" />
+        <ProjectReference Include="..\..\Infrastructure\DrugManagement.ServiceDefaults\DrugManagement.ServiceDefaults.csproj" />
+    </ItemGroup>
+
+    <Import Project="..\..\Infrastructure\DrugManagement.Shared\DrugManagement.Shared.projitems" Label="Shared" />
+</Project>
