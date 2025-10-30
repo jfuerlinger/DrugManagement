@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DrugService } from '../../services/drug.service';
 import { Drug } from '../../models/drug.model';
+import { DrugFormComponent } from '../drug-form/drug-form.component';
 
 @Component({
   selector: 'app-drug-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DrugFormComponent],
   template: `
     <div class="page-container">
       <!-- Header -->
@@ -35,12 +36,18 @@ import { Drug } from '../../models/drug.model';
             <div class="empty-icon">📦</div>
             <h3 class="empty-title">No drugs found</h3>
             <p class="empty-message">Start by adding your first medication to the inventory.</p>
+            <button class="btn-add-drug-empty" (click)="showAddForm()">
+              ➕ Add New Drug
+            </button>
           </div>
 
           <!-- Drugs Table -->
           <div *ngIf="!loading && drugs.length > 0" class="table-container">
             <div class="table-header">
               <h2 class="table-title">All Medications ({{ drugs.length }})</h2>
+              <button class="btn-add-drug" (click)="showAddForm()">
+                ➕ Add New Drug
+              </button>
             </div>
             
             <div class="table-wrapper">
@@ -75,7 +82,7 @@ import { Drug } from '../../models/drug.model';
                     </td>
                     <td class="actions-cell">
                       <button class="btn-icon" title="View details">👁️</button>
-                      <button class="btn-icon" title="Edit">✏️</button>
+                      <button class="btn-icon" title="Edit" (click)="showEditForm(drug)">✏️</button>
                       <button class="btn-icon delete" title="Delete" (click)="deleteDrug(drug.id)">🗑️</button>
                     </td>
                   </tr>
@@ -85,6 +92,14 @@ import { Drug } from '../../models/drug.model';
           </div>
         </div>
       </main>
+
+      <!-- Drug Form Modal -->
+      <app-drug-form
+        *ngIf="showForm"
+        [drug]="selectedDrug"
+        (save)="saveDrug($event)"
+        (cancel)="hideForm()"
+      ></app-drug-form>
     </div>
   `,
   styles: [`
@@ -210,13 +225,39 @@ import { Drug } from '../../models/drug.model';
     .empty-message {
       font-size: 16px;
       color: #64748b;
-      margin: 0;
+      margin: 0 0 24px 0;
+    }
+
+    .btn-add-drug-empty {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-add-drug-empty:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     }
 
     .table-header {
       margin-bottom: 24px;
       padding-bottom: 20px;
       border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .table-title {
@@ -224,6 +265,27 @@ import { Drug } from '../../models/drug.model';
       font-weight: 700;
       color: #1e293b;
       margin: 0;
+    }
+
+    .btn-add-drug {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-add-drug:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     }
 
     .table-wrapper {
@@ -347,6 +409,8 @@ export class DrugListComponent implements OnInit {
 
   drugs: Drug[] = [];
   loading = true;
+  showForm = false;
+  selectedDrug?: Drug;
 
   ngOnInit() {
     this.loadDrugs();
@@ -364,6 +428,43 @@ export class DrugListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  showAddForm() {
+    this.selectedDrug = undefined;
+    this.showForm = true;
+  }
+
+  showEditForm(drug: Drug) {
+    this.selectedDrug = drug;
+    this.showForm = true;
+  }
+
+  hideForm() {
+    this.showForm = false;
+    this.selectedDrug = undefined;
+  }
+
+  saveDrug(drugData: Omit<Drug, 'id'> | Drug) {
+    if ('id' in drugData) {
+      // Update existing drug
+      this.drugService.updateDrug(drugData.id, drugData).subscribe({
+        next: () => {
+          this.loadDrugs();
+          this.hideForm();
+        },
+        error: (err) => console.error('Error updating drug:', err)
+      });
+    } else {
+      // Create new drug
+      this.drugService.createDrug(drugData).subscribe({
+        next: () => {
+          this.loadDrugs();
+          this.hideForm();
+        },
+        error: (err) => console.error('Error creating drug:', err)
+      });
+    }
   }
 
   deleteDrug(id: number) {
