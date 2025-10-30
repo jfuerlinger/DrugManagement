@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PersonService } from '../../services/person.service';
 import { Person } from '../../models/person.model';
+import { PersonFormComponent } from '../person-form/person-form.component';
 
 @Component({
   selector: 'app-person-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PersonFormComponent],
   template: `
     <div class="page-container">
       <!-- Header -->
@@ -35,12 +36,18 @@ import { Person } from '../../models/person.model';
             <div class="empty-icon">👥</div>
             <h3 class="empty-title">No people found</h3>
             <p class="empty-message">Start by adding your first person.</p>
+            <button class="btn-add-person-empty" (click)="showAddForm()">
+              ➕ Add New Person
+            </button>
           </div>
 
           <!-- Persons Grid -->
           <div *ngIf="!loading && persons.length > 0">
             <div class="table-header">
               <h2 class="table-title">All People ({{ persons.length }})</h2>
+              <button class="btn-add-person" (click)="showAddForm()">
+                ➕ Add New Person
+              </button>
             </div>
 
             <div class="persons-grid">
@@ -61,7 +68,7 @@ import { Person } from '../../models/person.model';
                   </div>
                 </div>
                 <div class="person-actions">
-                  <button class="btn-action edit" title="Edit">✏️ Edit</button>
+                  <button class="btn-action edit" title="Edit" (click)="showEditForm(person)">✏️ Edit</button>
                   <button class="btn-action delete" title="Delete" (click)="deletePerson(person.id)">🗑️ Delete</button>
                 </div>
               </div>
@@ -69,6 +76,14 @@ import { Person } from '../../models/person.model';
           </div>
         </div>
       </main>
+
+      <!-- Person Form Modal -->
+      <app-person-form
+        *ngIf="showForm"
+        [person]="selectedPerson"
+        (save)="savePerson($event)"
+        (cancel)="hideForm()"
+      ></app-person-form>
     </div>
   `,
   styles: [`
@@ -192,13 +207,39 @@ import { Person } from '../../models/person.model';
     .empty-message {
       font-size: 16px;
       color: #64748b;
-      margin: 0;
+      margin: 0 0 24px 0;
+    }
+
+    .btn-add-person-empty {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+    }
+
+    .btn-add-person-empty:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
     }
 
     .table-header {
       margin-bottom: 32px;
       padding-bottom: 20px;
       border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .table-title {
@@ -206,6 +247,27 @@ import { Person } from '../../models/person.model';
       font-weight: 700;
       color: #1e293b;
       margin: 0;
+    }
+
+    .btn-add-person {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+    }
+
+    .btn-add-person:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
     }
 
     .persons-grid {
@@ -374,6 +436,8 @@ export class PersonListComponent implements OnInit {
 
   persons: Person[] = [];
   loading = true;
+  showForm = false;
+  selectedPerson?: Person;
 
   ngOnInit() {
     this.loadPersons();
@@ -391,6 +455,43 @@ export class PersonListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  showAddForm() {
+    this.selectedPerson = undefined;
+    this.showForm = true;
+  }
+
+  showEditForm(person: Person) {
+    this.selectedPerson = person;
+    this.showForm = true;
+  }
+
+  hideForm() {
+    this.showForm = false;
+    this.selectedPerson = undefined;
+  }
+
+  savePerson(personData: Omit<Person, 'id'> | Person) {
+    if ('id' in personData) {
+      // Update existing person
+      this.personService.updatePerson(personData.id, personData).subscribe({
+        next: () => {
+          this.loadPersons();
+          this.hideForm();
+        },
+        error: (err) => console.error('Error updating person:', err)
+      });
+    } else {
+      // Create new person
+      this.personService.createPerson(personData).subscribe({
+        next: () => {
+          this.loadPersons();
+          this.hideForm();
+        },
+        error: (err) => console.error('Error creating person:', err)
+      });
+    }
   }
 
   deletePerson(id: number) {
