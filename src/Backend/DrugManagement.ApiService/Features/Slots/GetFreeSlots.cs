@@ -11,7 +11,7 @@ internal sealed class GetFreeSlots(ILogger<GetFreeSlots> logger)
 {
     public override void Configure()
     {
-        Get("/api/slots");
+        Get("/slots");
 
         Summary(s =>
         {

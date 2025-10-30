@@ -76,7 +76,7 @@ try
         app.MapDefaultEndpoints();
 
         app.UseFastEndpoints()
-            .UseSwaggerGen();
+           .UseSwaggerGen();
 
         app.UseCors(static builder =>
             builder.AllowAnyMethod()

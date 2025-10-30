@@ -12,7 +12,7 @@ internal sealed class ApplyMigrations(
 {
     public override void Configure()
     {
-        Patch("/api/management/tables");
+        Patch("/management/tables");
         
         Summary(s =>
         {

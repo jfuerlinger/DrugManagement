@@ -14,7 +14,7 @@ internal sealed class SeedData(
 {
     public override void Configure()
     {
-        Post("/api/management/data");
+        Post("/management/data");
 
         Summary(s =>
         {

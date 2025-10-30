@@ -12,7 +12,7 @@ internal sealed class DeleteData(
 {
     public override void Configure()
     {
-        Delete("/api/management/data");
+        Delete("/management/data");
 
         Summary(s =>
         {

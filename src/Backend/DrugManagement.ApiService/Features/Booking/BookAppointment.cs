@@ -11,7 +11,7 @@ internal sealed class BookAppointment(
 {
     public override void Configure()
     {
-        Post("/api/booking");
+        Post("/booking");
         Summary(s =>
         {
             s.Summary = "Books a slot";
