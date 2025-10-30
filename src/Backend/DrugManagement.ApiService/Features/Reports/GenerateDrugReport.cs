@@ -37,12 +37,14 @@ internal sealed class GenerateDrugReport(
 
             logger.LogInformation("Drug report generation initiated with ID: {ReportId}", reportId);
 
-            await SendAsync(new GenerateDrugReportResponse
+            HttpContext.Response.StatusCode = 202;
+            
+            await Send.OkAsync(new GenerateDrugReportResponse
             {
                 ReportId = reportId,
                 Message = "Report generation initiated successfully",
                 DownloadUrl = $"/reports/drugs/download/{reportId}"
-            }, 202, ct);
+            }, ct);
         }
         catch (Exception ex)
         {

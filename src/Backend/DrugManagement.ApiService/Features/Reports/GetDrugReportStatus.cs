@@ -35,16 +35,16 @@ internal sealed class GetDrugReportStatus(
         if (!isReady)
         {
             logger.LogInformation("Report not found: {ReportId}", req.ReportId);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
-        await SendAsync(new GetDrugReportStatusResponse
+        await Send.OkAsync(new GetDrugReportStatusResponse
         {
             ReportId = req.ReportId,
             IsReady = true,
             DownloadUrl = $"/reports/drugs/download/{req.ReportId}"
-        }, cancellation: ct);
+        }, ct);
     }
 }
 

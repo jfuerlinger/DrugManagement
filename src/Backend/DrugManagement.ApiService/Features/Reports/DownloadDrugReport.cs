@@ -38,7 +38,7 @@ internal sealed class DownloadDrugReport(
             {
                 logger.LogWarning("Report not found or not ready: {ReportId}", req.ReportId);
                 
-                await SendNotFoundAsync(ct);
+                await Send.NotFoundAsync(ct);
                 return;
             }
 
@@ -49,21 +49,19 @@ internal sealed class DownloadDrugReport(
             {
                 logger.LogWarning("Report path is null for ID: {ReportId}", req.ReportId);
                 
-                await SendNotFoundAsync(ct);
+                await Send.NotFoundAsync(ct);
                 return;
             }
 
             logger.LogInformation("Sending PDF report: {ReportPath}", reportPath);
 
-            // Read file and send as response
-            var fileBytes = await File.ReadAllBytesAsync(reportPath, ct);
+            // Send file as response
             var fileName = $"Medikamentenbericht-{DateTime.Now:yyyy-MM-dd-HHmmss}.pdf";
-
-            await SendBytesAsync(
-                fileBytes,
-                fileName,
-                contentType: "application/pdf",
-                cancellation: ct);
+            var fileBytes = await File.ReadAllBytesAsync(reportPath, ct);
+            
+            HttpContext.Response.ContentType = "application/pdf";
+            HttpContext.Response.Headers.Append("Content-Disposition", $"attachment; filename=\"{fileName}\"");
+            await HttpContext.Response.Body.WriteAsync(fileBytes, ct);
         }
         catch (Exception ex)
         {
