@@ -26,13 +26,13 @@ dotnet tool install --global dotnet-ef
 # ODER Podman - Download von https://podman-desktop.io/downloads
 
 # NPM Pakete installieren
-cd src/Frontend/Terminbuchung.Frontend/
+cd src/Frontend/DrugManagement.Frontend/
 npm install
 
 # DEV Tunnel CLI installieren
 winget install Microsoft.devtunnel
 
-# Terminbuchung.AppHost als Startup Project in Visual Studio konfigurieren
+# DrugManagement.AppHost als Startup Project in Visual Studio konfigurieren
 
 # Das AppHost Projekt per F5 starten
 ```
@@ -79,8 +79,14 @@ Das Terminbuchungs-System ist als **mikroservice-orientierte Architektur** mit *
 ### Eine neue Datenmigration erstellen
 
 ```bash
-cd \Terminbuchung\src\Backend\Terminbuchung.ApiService
-dotnet ef migrations add <Migrationsname> --project ..\..\Infrastructure\Terminbuchung.Core\Terminbuchung.Core.csproj
+cd C:\Projekte\Privat\DrugManagement\src\Backend\DrugManagement.ApiService
+dotnet ef migrations add <Migrationsname> --project ..\..\Infrastructure\DrugManagement.Core\DrugManagement.Core.csproj
+```
+
+**Beispiel:**
+```bash
+cd C:\Projekte\Privat\DrugManagement\src\Backend\DrugManagement.ApiService
+dotnet ef migrations add AddDrugManagementEntities --project ..\..\Infrastructure\DrugManagement.Core\DrugManagement.Core.csproj
 ```
 
 ### Migration anwenden
@@ -88,19 +94,21 @@ dotnet ef migrations add <Migrationsname> --project ..\..\Infrastructure\Terminb
 Die Migrationen werden automatisch beim Start der Anwendung durch den **Migration Worker** angewendet. Manuelle Ausführung:
 
 ```bash
-dotnet ef database update --project ..\..\Infrastructure\Terminbuchung.Core\Terminbuchung.Core.csproj
+cd C:\Projekte\Privat\DrugManagement\src\Backend\DrugManagement.ApiService
+dotnet ef database update --project ..\..\Infrastructure\DrugManagement.Core\DrugManagement.Core.csproj
 ```
 
-### Migration rückgüngig machen
+### Migration rückgängig machen
 
 ```bash
-dotnet ef database update <VorherigerMigrationsname> --project ..\..\Infrastructure\Terminbuchung.Core\Terminbuchung.Core.csproj
+cd C:\Projekte\Privat\DrugManagement\src\Backend\DrugManagement.ApiService
+dotnet ef database update <VorherigerMigrationsname> --project ..\..\Infrastructure\DrugManagement.Core\DrugManagement.Core.csproj
 ```
 
 ## Development Setup
 
 1. **Prerequisites**: .NET 10 SDK, Node.js 20+, Docker
-2. **Start**: `dotnet run --project Infrastructure/Terminbuchung.AppHost`
+2. **Start**: `dotnet run --project Infrastructure/DrugManagement.AppHost`
 3. **Frontend**: Wird automatisch durch Aspire gestartet
 4. **Database**: PostgreSQL Container mit PgAdmin
 5. **Service Bus**: Emulator mit Web-Viewer auf Port 8080
