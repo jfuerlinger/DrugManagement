@@ -32,6 +32,19 @@ internal sealed class CreatePerson(
 
     public override async Task HandleAsync(CreatePersonRequest request, CancellationToken ct)
     {
+        // Validate required fields
+        if (string.IsNullOrWhiteSpace(request.Firstname))
+        {
+            AddError(r => r.Firstname, "Firstname is required");
+        }
+        
+        if (string.IsNullOrWhiteSpace(request.Lastname))
+        {
+            AddError(r => r.Lastname, "Lastname is required");
+        }
+        
+        ThrowIfAnyErrors();
+
         logger.LogInformation("Creating new person: {Firstname} {Lastname}", request.Firstname, request.Lastname);
 
         var person = new Person

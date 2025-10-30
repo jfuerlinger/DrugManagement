@@ -33,6 +33,19 @@ internal sealed class UpdatePerson(
 
     public override async Task HandleAsync(UpdatePersonRequest request, CancellationToken ct)
     {
+        // Validate required fields
+        if (string.IsNullOrWhiteSpace(request.Firstname))
+        {
+            AddError(r => r.Firstname, "Firstname is required");
+        }
+        
+        if (string.IsNullOrWhiteSpace(request.Lastname))
+        {
+            AddError(r => r.Lastname, "Lastname is required");
+        }
+        
+        ThrowIfAnyErrors();
+
         logger.LogInformation("Updating person with ID: {PersonId}", request.Id);
 
         var person = await dbContext.Persons
