@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <ItemGroup>
     <!-- Aspire packages -->
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.5.1" />
-    <PackageVersion Include="Aspire.Hosting.Azure.Functions" Version="9.4.2-preview.1.25428.12" />
-    <PackageVersion Include="Aspire.Hosting.Azure.ServiceBus" Version="9.4.2" />
-    <PackageVersion Include="Aspire.Hosting.DevTunnels" Version="9.5.1-preview.1.25502.11" />
-    <PackageVersion Include="Aspire.Hosting.NodeJs" Version="9.5.1" />
-    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="9.5.1" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="13.0.0-preview.1.25529.9" />
+    <PackageVersion Include="Aspire.Hosting.Azure.Functions" Version="13.0.0-preview.1.25529.9" />
+    <PackageVersion Include="Aspire.Hosting.Azure.ServiceBus" Version="13.0.0-preview.1.25529.9" />
+    <PackageVersion Include="Aspire.Hosting.DevTunnels" Version="13.0.0-preview.1.25529.9" />
+    <PackageVersion Include="Aspire.Hosting.NodeJs" Version="13.0.0-preview.1.25529.9" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.0.0-preview.1.25529.9" />
     <PackageVersion Include="Aspire.Hosting.Testing" Version="9.5.1" />
-    <PackageVersion Include="Aspire.Azure.Messaging.ServiceBus" Version="9.5.1" />
-    <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.5.1" />
+    <PackageVersion Include="Aspire.Azure.Messaging.ServiceBus" Version="13.0.0-preview.1.25529.9" />
+    <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.0.0-preview.1.25529.9" />
     <!-- Azure packages -->
     <PackageVersion Include="Azure.Messaging.ServiceBus" Version="7.20.1" />
     <PackageVersion Include="Data8.PowerPlatform.Dataverse.Client" Version="2.4.2" />
     <!-- Microsoft packages -->
-    <PackageVersion Include="KubernetesClient" Version="17.0.14" />
+    <PackageVersion Include="KubernetesClient" Version="18.0.5" />
     <PackageVersion Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.23.0" />
     <PackageVersion Include="Microsoft.ApplicationInsights.WorkerService" Version="2.23.0" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
@@ -25,13 +25,13 @@
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.ServiceBus" Version="5.24.0" />
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" Version="4.3.1" />
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Sdk" Version="2.0.5" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.10.0" />
-    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.5.1" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.0.0-preview.1.25523.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0-preview.4" />
     <!-- Third-party packages -->
