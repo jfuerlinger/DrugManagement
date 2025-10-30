@@ -84,7 +84,7 @@ import { Shop } from '../../models/shop.model';
     .page-header {
       background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       color: white;
-      padding: 32px 24px;
+      padding: 32px 24px 48px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
@@ -116,6 +116,7 @@ import { Shop } from '../../models/shop.model';
     .header-content {
       max-width: 1200px;
       margin: 0 auto;
+      min-height: 80px;
     }
 
     .page-title {
@@ -129,6 +130,7 @@ import { Shop } from '../../models/shop.model';
       font-size: 16px;
       margin: 0;
       opacity: 0.95;
+      line-height: 1.5;
     }
 
     .page-content {
@@ -339,7 +341,7 @@ import { Shop } from '../../models/shop.model';
 
     @media (max-width: 768px) {
       .page-header {
-        padding: 24px 16px;
+        padding: 24px 16px 40px;
       }
 
       .page-title {

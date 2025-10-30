@@ -95,7 +95,7 @@ import { PersonFormComponent } from '../person-form/person-form.component';
     .page-header {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       color: white;
-      padding: 32px 24px;
+      padding: 32px 24px 48px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
@@ -127,6 +127,7 @@ import { PersonFormComponent } from '../person-form/person-form.component';
     .header-content {
       max-width: 1200px;
       margin: 0 auto;
+      min-height: 80px;
     }
 
     .page-title {
@@ -140,6 +141,7 @@ import { PersonFormComponent } from '../person-form/person-form.component';
       font-size: 16px;
       margin: 0;
       opacity: 0.95;
+      line-height: 1.5;
     }
 
     .page-content {
@@ -407,12 +409,10 @@ import { PersonFormComponent } from '../person-form/person-form.component';
       color: white;
     }
 
-    @media (max-width: 768px) {
+      @media (max-width: 768px) {
       .page-header {
-        padding: 24px 16px;
-      }
-
-      .page-title {
+        padding: 24px 16px 40px;
+      }      .page-title {
         font-size: 28px;
       }
 

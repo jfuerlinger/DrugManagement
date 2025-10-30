@@ -96,7 +96,7 @@ import { Drug } from '../../models/drug.model';
     .page-header {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 32px 24px;
+      padding: 32px 24px 48px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
@@ -128,6 +128,7 @@ import { Drug } from '../../models/drug.model';
     .header-content {
       max-width: 1200px;
       margin: 0 auto;
+      min-height: 80px;
     }
 
     .page-title {
@@ -141,6 +142,7 @@ import { Drug } from '../../models/drug.model';
       font-size: 16px;
       margin: 0;
       opacity: 0.95;
+      line-height: 1.5;
     }
 
     .page-content {
@@ -314,7 +316,7 @@ import { Drug } from '../../models/drug.model';
 
     @media (max-width: 768px) {
       .page-header {
-        padding: 24px 16px;
+        padding: 24px 16px 40px;
       }
 
       .page-title {
