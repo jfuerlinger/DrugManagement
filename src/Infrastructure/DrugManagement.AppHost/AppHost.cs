@@ -1,3 +1,4 @@
+using DrugManagement.AppHost.Extensions;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
@@ -41,6 +42,7 @@ var frontend = builder.AddNpmApp(DrugManagement.Shared.Metadata.Constants.Projec
     .WaitFor(api)
     .WithHttpEndpoint(env: "PORT")
     .WithExternalHttpEndpoints()
+    .WithNpmInstallCommand()
     .PublishAsDockerFile();
 
 
