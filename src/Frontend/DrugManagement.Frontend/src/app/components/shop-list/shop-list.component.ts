@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ShopService } from '../../services/shop.service';
 import { Shop } from '../../models/shop.model';
+import { ShopFormComponent } from '../shop-form/shop-form.component';
 
 @Component({
   selector: 'app-shop-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ShopFormComponent],
   template: `
     <div class="page-container">
       <!-- Header -->
@@ -35,12 +36,18 @@ import { Shop } from '../../models/shop.model';
             <div class="empty-icon">🏪</div>
             <h3 class="empty-title">No pharmacies found</h3>
             <p class="empty-message">Start by adding your first pharmacy location.</p>
+            <button class="btn-add-shop-empty" (click)="showAddForm()">
+              ➕ Add New Pharmacy
+            </button>
           </div>
 
           <!-- Shops Grid -->
           <div *ngIf="!loading && shops.length > 0">
             <div class="table-header">
               <h2 class="table-title">All Pharmacies ({{ shops.length }})</h2>
+              <button class="btn-add-shop" (click)="showAddForm()">
+                ➕ Add New Pharmacy
+              </button>
             </div>
 
             <div class="shops-grid">
@@ -65,7 +72,7 @@ import { Shop } from '../../models/shop.model';
                   </div>
                 </div>
                 <div class="shop-actions">
-                  <button class="btn-action edit" title="Edit">✏️ Edit</button>
+                  <button class="btn-action edit" title="Edit" (click)="showEditForm(shop)">✏️ Edit</button>
                   <button class="btn-action delete" title="Delete" (click)="deleteShop(shop.id)">🗑️ Delete</button>
                 </div>
               </div>
@@ -73,6 +80,14 @@ import { Shop } from '../../models/shop.model';
           </div>
         </div>
       </main>
+
+      <!-- Shop Form Modal -->
+      <app-shop-form
+        *ngIf="showForm"
+        [shop]="selectedShop"
+        (save)="saveShop($event)"
+        (cancel)="hideForm()"
+      ></app-shop-form>
     </div>
   `,
   styles: [`
@@ -198,13 +213,39 @@ import { Shop } from '../../models/shop.model';
     .empty-message {
       font-size: 16px;
       color: #64748b;
-      margin: 0;
+      margin: 0 0 24px 0;
+    }
+
+    .btn-add-shop-empty {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(240, 147, 251, 0.3);
+    }
+
+    .btn-add-shop-empty:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
     }
 
     .table-header {
       margin-bottom: 32px;
       padding-bottom: 20px;
       border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .table-title {
@@ -212,6 +253,27 @@ import { Shop } from '../../models/shop.model';
       font-weight: 700;
       color: #1e293b;
       margin: 0;
+    }
+
+    .btn-add-shop {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(240, 147, 251, 0.3);
+    }
+
+    .btn-add-shop:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
     }
 
     .shops-grid {
@@ -368,6 +430,8 @@ export class ShopListComponent implements OnInit {
 
   shops: Shop[] = [];
   loading = true;
+  showForm = false;
+  selectedShop?: Shop;
 
   ngOnInit() {
     this.loadShops();
@@ -385,6 +449,43 @@ export class ShopListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  showAddForm() {
+    this.selectedShop = undefined;
+    this.showForm = true;
+  }
+
+  showEditForm(shop: Shop) {
+    this.selectedShop = shop;
+    this.showForm = true;
+  }
+
+  hideForm() {
+    this.showForm = false;
+    this.selectedShop = undefined;
+  }
+
+  saveShop(shopData: Omit<Shop, 'id'> | Shop) {
+    if ('id' in shopData) {
+      // Update existing shop
+      this.shopService.updateShop(shopData.id, shopData).subscribe({
+        next: () => {
+          this.loadShops();
+          this.hideForm();
+        },
+        error: (err) => console.error('Error updating shop:', err)
+      });
+    } else {
+      // Create new shop
+      this.shopService.createShop(shopData).subscribe({
+        next: () => {
+          this.loadShops();
+          this.hideForm();
+        },
+        error: (err) => console.error('Error creating shop:', err)
+      });
+    }
   }
 
   deleteShop(id: number) {
