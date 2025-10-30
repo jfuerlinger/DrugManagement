@@ -4,3 +4,21 @@ GET {{ApiService_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+# Generate Drug Report
+POST {{ApiService_HostAddress}}/reports/drugs/generate
+Accept: application/json
+
+###
+
+# Check Report Status
+GET {{ApiService_HostAddress}}/reports/drugs/status/{{reportId}}
+Accept: application/json
+
+###
+
+# Download Drug Report
+GET {{ApiService_HostAddress}}/reports/drugs/download/{{reportId}}
+Accept: application/pdf
+
+###
