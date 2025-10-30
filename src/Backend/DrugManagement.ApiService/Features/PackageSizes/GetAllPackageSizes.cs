@@ -38,7 +38,7 @@ internal sealed class GetAllPackageSizes(
 
         logger.LogInformation("Found {Count} package sizes", packageSizes.Count);
 
-        await SendOkAsync(new GetAllPackageSizesResponse { PackageSizes = packageSizes }, ct);
+        await Send.OkAsync(new GetAllPackageSizesResponse { PackageSizes = packageSizes }, ct);
     }
 }
 

@@ -42,12 +42,12 @@ internal sealed class GetPackageSizeById(
         if (packageSize is null)
         {
             logger.LogWarning("Package size with ID {PackageSizeId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
         logger.LogInformation("Package size found: {BundleSize} {BundleType}", packageSize.BundleSize, packageSize.BundleType);
-        await SendOkAsync(packageSize, ct);
+        await Send.OkAsync(packageSize, ct);
     }
 }
 

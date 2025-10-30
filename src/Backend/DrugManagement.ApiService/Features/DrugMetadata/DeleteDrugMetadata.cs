@@ -37,7 +37,7 @@ internal sealed class DeleteDrugMetadata(
         if (drugMetadata is null)
         {
             logger.LogWarning("Drug metadata with ID {DrugMetadataId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
@@ -49,7 +49,7 @@ internal sealed class DeleteDrugMetadata(
                 request.Id, drugMetadata.PackageSizes.Count, drugMetadata.Drugs.Count);
 
             AddError("Cannot delete drug metadata because it has associated package sizes or drugs");
-            await SendErrorsAsync(409, ct);
+            await Send.ErrorsAsync(409, ct);
             return;
         }
 
@@ -58,7 +58,7 @@ internal sealed class DeleteDrugMetadata(
 
         logger.LogInformation("Drug metadata deleted: {DrugName}", drugMetadata.Name);
 
-        await SendNoContentAsync(ct);
+        await Send.NoContentAsync(ct);
     }
 }
 

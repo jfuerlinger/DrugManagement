@@ -34,7 +34,7 @@ internal sealed class DeleteDrug(
         if (drug is null)
         {
             logger.LogWarning("Drug with ID {DrugId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
@@ -43,7 +43,7 @@ internal sealed class DeleteDrug(
 
         logger.LogInformation("Drug deleted with ID: {DrugId}", drug.Id);
 
-        await SendNoContentAsync(ct);
+        await Send.NoContentAsync(ct);
     }
 }
 

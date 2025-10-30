@@ -39,7 +39,7 @@ internal sealed class GetAllDrugMetadata(
 
         logger.LogInformation("Found {Count} drug metadata records", drugMetadata.Count);
 
-        await SendOkAsync(new GetAllDrugMetadataResponse { DrugMetadata = drugMetadata }, ct);
+        await Send.OkAsync(new GetAllDrugMetadataResponse { DrugMetadata = drugMetadata }, ct);
     }
 }
 

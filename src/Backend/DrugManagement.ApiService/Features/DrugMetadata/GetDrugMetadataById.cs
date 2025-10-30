@@ -43,12 +43,12 @@ internal sealed class GetDrugMetadataById(
         if (drugMetadata is null)
         {
             logger.LogWarning("Drug metadata with ID {DrugMetadataId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
         logger.LogInformation("Drug metadata found: {DrugName}", drugMetadata.Name);
-        await SendOkAsync(drugMetadata, ct);
+        await Send.OkAsync(drugMetadata, ct);
     }
 }
 

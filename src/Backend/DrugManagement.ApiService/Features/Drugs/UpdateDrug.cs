@@ -48,7 +48,7 @@ internal sealed class UpdateDrug(
         if (drug is null)
         {
             logger.LogWarning("Drug with ID {DrugId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
@@ -60,7 +60,7 @@ internal sealed class UpdateDrug(
         {
             logger.LogWarning("Drug metadata with ID {MetadataId} not found", request.MetadataId);
             AddError("Drug metadata not found");
-            await SendErrorsAsync(404, ct);
+            await Send.ErrorsAsync(404, ct);
             return;
         }
 
@@ -71,7 +71,7 @@ internal sealed class UpdateDrug(
         {
             logger.LogWarning("Package size with ID {DrugPackageSizeId} not found", request.DrugPackageSizeId);
             AddError("Package size not found");
-            await SendErrorsAsync(404, ct);
+            await Send.ErrorsAsync(404, ct);
             return;
         }
 
@@ -82,7 +82,7 @@ internal sealed class UpdateDrug(
         {
             logger.LogWarning("Shop with ID {ShopId} not found", request.ShopId);
             AddError("Shop not found");
-            await SendErrorsAsync(404, ct);
+            await Send.ErrorsAsync(404, ct);
             return;
         }
 
@@ -116,7 +116,7 @@ internal sealed class UpdateDrug(
             AmountLeftInPercentage = drug.AmountLeftInPercentage
         };
 
-        await SendOkAsync(response, ct);
+        await Send.OkAsync(response, ct);
     }
 }
 

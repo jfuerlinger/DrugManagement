@@ -45,7 +45,7 @@ internal sealed class GetAllDrugs(
 
         logger.LogInformation("Found {Count} drugs", drugs.Count);
 
-        await SendOkAsync(new GetAllDrugsResponse { Drugs = drugs }, ct);
+        await Send.OkAsync(new GetAllDrugsResponse { Drugs = drugs }, ct);
     }
 }
 

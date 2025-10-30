@@ -49,12 +49,12 @@ internal sealed class GetDrugById(
         if (drug is null)
         {
             logger.LogWarning("Drug with ID {DrugId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
         logger.LogInformation("Drug found with ID: {DrugId}", drug.Id);
-        await SendOkAsync(drug, ct);
+        await Send.OkAsync(drug, ct);
     }
 }
 

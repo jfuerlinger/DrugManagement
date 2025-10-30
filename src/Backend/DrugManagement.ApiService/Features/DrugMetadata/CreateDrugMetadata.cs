@@ -57,7 +57,7 @@ internal sealed class CreateDrugMetadata(
             Agreeability = drugMetadata.Agreeability
         };
 
-        await SendCreatedAtAsync<GetDrugMetadataById>(
+        await Send.CreatedAtAsync<GetDrugMetadataById>(
             routeValues: new { id = drugMetadata.Id },
             responseBody: response,
             cancellation: ct);

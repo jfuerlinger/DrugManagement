@@ -44,7 +44,7 @@ internal sealed class CreatePackageSize(
         {
             logger.LogWarning("Drug metadata with ID {DrugMetaDataId} not found", request.DrugMetaDataId);
             AddError("Drug metadata not found");
-            await SendErrorsAsync(404, ct);
+            await Send.ErrorsAsync(404, ct);
             return;
         }
 
@@ -68,7 +68,7 @@ internal sealed class CreatePackageSize(
             BundleType = packageSize.BundleType
         };
 
-        await SendCreatedAtAsync<GetPackageSizeById>(
+        await Send.CreatedAtAsync<GetPackageSizeById>(
             routeValues: new { id = packageSize.Id },
             responseBody: response,
             cancellation: ct);

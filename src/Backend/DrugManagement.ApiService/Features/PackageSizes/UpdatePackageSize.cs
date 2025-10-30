@@ -41,7 +41,7 @@ internal sealed class UpdatePackageSize(
         if (packageSize is null)
         {
             logger.LogWarning("Package size with ID {PackageSizeId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
@@ -53,7 +53,7 @@ internal sealed class UpdatePackageSize(
         {
             logger.LogWarning("Drug metadata with ID {DrugMetaDataId} not found", request.DrugMetaDataId);
             AddError("Drug metadata not found");
-            await SendErrorsAsync(404, ct);
+            await Send.ErrorsAsync(404, ct);
             return;
         }
 
@@ -73,7 +73,7 @@ internal sealed class UpdatePackageSize(
             BundleType = packageSize.BundleType
         };
 
-        await SendOkAsync(response, ct);
+        await Send.OkAsync(response, ct);
     }
 }
 

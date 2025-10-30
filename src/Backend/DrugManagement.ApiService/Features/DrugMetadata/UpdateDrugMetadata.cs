@@ -42,7 +42,7 @@ internal sealed class UpdateDrugMetadata(
         if (drugMetadata is null)
         {
             logger.LogWarning("Drug metadata with ID {DrugMetadataId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
@@ -64,7 +64,7 @@ internal sealed class UpdateDrugMetadata(
             Agreeability = drugMetadata.Agreeability
         };
 
-        await SendOkAsync(response, ct);
+        await Send.OkAsync(response, ct);
     }
 }
 

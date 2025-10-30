@@ -36,7 +36,7 @@ internal sealed class DeletePackageSize(
         if (packageSize is null)
         {
             logger.LogWarning("Package size with ID {PackageSizeId} not found", request.Id);
-            await SendNotFoundAsync(ct);
+            await Send.NotFoundAsync(ct);
             return;
         }
 
@@ -48,7 +48,7 @@ internal sealed class DeletePackageSize(
                 request.Id, packageSize.Drugs.Count);
 
             AddError("Cannot delete package size because it has associated drugs");
-            await SendErrorsAsync(409, ct);
+            await Send.ErrorsAsync(409, ct);
             return;
         }
 
@@ -57,7 +57,7 @@ internal sealed class DeletePackageSize(
 
         logger.LogInformation("Package size deleted: {BundleSize} {BundleType}", packageSize.BundleSize, packageSize.BundleType);
 
-        await SendNoContentAsync(ct);
+        await Send.NoContentAsync(ct);
     }
 }
 

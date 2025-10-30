@@ -51,7 +51,7 @@ internal sealed class CreateDrug(
         {
             logger.LogWarning("Drug metadata with ID {MetadataId} not found", request.MetadataId);
             AddError("Drug metadata not found");
-            await SendErrorsAsync(404, ct);
+            await Send.ErrorsAsync(404, ct);
             return;
         }
 
@@ -62,7 +62,7 @@ internal sealed class CreateDrug(
         {
             logger.LogWarning("Package size with ID {DrugPackageSizeId} not found", request.DrugPackageSizeId);
             AddError("Package size not found");
-            await SendErrorsAsync(404, ct);
+            await Send.ErrorsAsync(404, ct);
             return;
         }
 
@@ -73,7 +73,7 @@ internal sealed class CreateDrug(
         {
             logger.LogWarning("Shop with ID {ShopId} not found", request.ShopId);
             AddError("Shop not found");
-            await SendErrorsAsync(404, ct);
+            await Send.ErrorsAsync(404, ct);
             return;
         }
 
@@ -111,7 +111,7 @@ internal sealed class CreateDrug(
             AmountLeftInPercentage = drug.AmountLeftInPercentage
         };
 
-        await SendCreatedAtAsync<GetDrugById>(
+        await Send.CreatedAtAsync<GetDrugById>(
             routeValues: new { id = drug.Id },
             responseBody: response,
             cancellation: ct);
