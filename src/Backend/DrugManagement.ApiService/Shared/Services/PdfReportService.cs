@@ -51,12 +51,14 @@ public class PdfReportService : IPdfReportService
                 .Include(d => d.Shop)
                 .Include(d => d.BoughtByPerson)
                 .Include(d => d.PersonConcernedPerson)
-                .OrderBy(d => d.PalatableUntil ?? DateTime.MaxValue)
+                .OrderBy(d => d.PalatableUntil.HasValue ? 0 : 1)
+                .ThenBy(d => d.PalatableUntil)
                 .Select(d => new DrugReportDto
                 {
                     DrugName = d.Metadata.Name,
                     Description = d.Metadata.Description ?? "N/A",
-                    PackageSize = $"{d.DrugPackageSize.BundleSize} {d.DrugPackageSize.BundleType ?? ""}",
+                    PackageSize = d.DrugPackageSize.BundleSize + 
+                                  (string.IsNullOrEmpty(d.DrugPackageSize.BundleType) ? "" : " " + d.DrugPackageSize.BundleType),
                     Shop = d.Shop.Name,
                     BoughtOn = d.BoughtOn,
                     OpenedOn = d.OpenedOn,
@@ -71,7 +73,7 @@ public class PdfReportService : IPdfReportService
             _logger.LogInformation("Found {Count} drugs for report", drugs.Count);
 
             // Generate PDF
-            await Task.Run(() => GeneratePdf(drugs, reportPath), cancellationToken);
+            GeneratePdf(drugs, reportPath);
 
             _logger.LogInformation("Drug report generated successfully: {ReportId}", reportId);
             return reportId;
