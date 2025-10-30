@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using FluentValidation;
 using DrugManagement.Core.FakeData;
 using DrugManagement.Core.Model;
 using static DrugManagement.ApiService.Features.Slots.GetFreeSlots;
@@ -38,6 +39,17 @@ internal sealed class GetFreeSlots(ILogger<GetFreeSlots> logger)
     }
 
     internal record GetFreeSlotsRequest(DateOnly Day);
+
+    internal sealed class GetFreeSlotsRequestValidator : Validator<GetFreeSlotsRequest>
+    {
+        public GetFreeSlotsRequestValidator()
+        {
+            RuleFor(x => x.Day)
+                .NotEmpty()
+                .WithMessage("Day is required");
+        }
+    }
+
     internal record GetFreeSlotsResponse(Slot[] FreeSlots);
 
     private static GetFreeSlotsResponse CreateDemoRequest()

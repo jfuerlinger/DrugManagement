@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using FluentValidation;
 using DrugManagement.ApiService.Shared.Services.Contracts;
 using static DrugManagement.ApiService.Features.Booking.BookAppointment;
 
@@ -35,4 +36,14 @@ internal sealed class BookAppointment(
     }
 
     internal record BookSlotRequest(DateTime From);
+
+    internal sealed class BookSlotRequestValidator : Validator<BookSlotRequest>
+    {
+        public BookSlotRequestValidator()
+        {
+            RuleFor(x => x.From)
+                .NotEmpty()
+                .WithMessage("From date is required");
+        }
+    }
 }

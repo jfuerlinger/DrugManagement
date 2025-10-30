@@ -1,4 +1,5 @@
 using FastEndpoints;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using DrugManagement.Core.DataAccess;
 
@@ -55,4 +56,14 @@ internal sealed class GetShopById(
 internal sealed record GetShopByIdRequest
 {
     public int Id { get; init; }
+}
+
+internal sealed class GetShopByIdRequestValidator : Validator<GetShopByIdRequest>
+{
+    public GetShopByIdRequestValidator()
+    {
+        RuleFor(x => x.Id)
+            .GreaterThan(0)
+            .WithMessage("Id must be greater than 0");
+    }
 }

@@ -1,4 +1,5 @@
 using FastEndpoints;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using DrugManagement.Core.DataAccess;
 
@@ -62,4 +63,14 @@ internal sealed class DeleteShop(
 internal sealed record DeleteShopRequest
 {
     public int Id { get; init; }
+}
+
+internal sealed class DeleteShopRequestValidator : Validator<DeleteShopRequest>
+{
+    public DeleteShopRequestValidator()
+    {
+        RuleFor(x => x.Id)
+            .GreaterThan(0)
+            .WithMessage("Id must be greater than 0");
+    }
 }

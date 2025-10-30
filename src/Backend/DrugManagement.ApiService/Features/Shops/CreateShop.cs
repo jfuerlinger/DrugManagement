@@ -1,4 +1,5 @@
 using FastEndpoints;
+using FluentValidation;
 using DrugManagement.Core.DataAccess;
 using DrugManagement.Core.Model;
 
@@ -18,7 +19,7 @@ internal sealed class CreateShop(
                 s.ExampleRequest = new CreateShopRequest
                 {
                     Name = "Apotheke am Markt",
-                    Street = "Hauptstraße 1",
+                    Street = "Hauptstraï¿½e 1",
                     Postalcode = "12345",
                     City = "Berlin",
                     Phone = "+49 30 12345678"
@@ -73,6 +74,38 @@ internal sealed record CreateShopRequest
     public string? Postalcode { get; init; }
     public string? City { get; init; }
     public string? Phone { get; init; }
+}
+
+internal sealed class CreateShopRequestValidator : Validator<CreateShopRequest>
+{
+    public CreateShopRequestValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .WithMessage("Name is required")
+            .MaximumLength(200)
+            .WithMessage("Name must not exceed 200 characters");
+
+        RuleFor(x => x.Street)
+            .MaximumLength(200)
+            .WithMessage("Street must not exceed 200 characters")
+            .When(x => x.Street != null);
+
+        RuleFor(x => x.Postalcode)
+            .MaximumLength(20)
+            .WithMessage("Postalcode must not exceed 20 characters")
+            .When(x => x.Postalcode != null);
+
+        RuleFor(x => x.City)
+            .MaximumLength(100)
+            .WithMessage("City must not exceed 100 characters")
+            .When(x => x.City != null);
+
+        RuleFor(x => x.Phone)
+            .MaximumLength(50)
+            .WithMessage("Phone must not exceed 50 characters")
+            .When(x => x.Phone != null);
+    }
 }
 
 internal sealed record CreateShopResponse
