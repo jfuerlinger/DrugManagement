@@ -336,7 +336,7 @@ export class ShopFormComponent implements OnInit {
   isEditMode = false;
 
   ngOnInit() {
-    this.isEditMode = !!this.shop;
+    this.isEditMode = Boolean(this.shop);
     this.initializeForm();
   }
 
@@ -358,7 +358,7 @@ export class ShopFormComponent implements OnInit {
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.shopForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched));
+    return Boolean(field && field.invalid && (field.dirty || field.touched));
   }
 
   onSubmit() {

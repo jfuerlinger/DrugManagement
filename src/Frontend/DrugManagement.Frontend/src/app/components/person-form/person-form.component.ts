@@ -337,7 +337,7 @@ export class PersonFormComponent implements OnInit {
   isEditMode = false;
 
   ngOnInit() {
-    this.isEditMode = !!this.person;
+    this.isEditMode = Boolean(this.person);
     this.initializeForm();
   }
 
@@ -364,7 +364,7 @@ export class PersonFormComponent implements OnInit {
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.personForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched));
+    return Boolean(field && field.invalid && (field.dirty || field.touched));
   }
 
   onSubmit() {
