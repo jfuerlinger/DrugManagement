@@ -31,9 +31,9 @@ internal sealed class GetFreeSlots(ILogger<GetFreeSlots> logger)
 
     public override async Task HandleAsync(GetFreeSlotsRequest request, CancellationToken ct)
     {
-        logger.LogInformation($"Entered GetFreeSlots ...");
+        logger.LogInformation("Entered GetFreeSlots ...");
         // do something
-        logger.LogInformation($"Exiting GetFreeSlots");
+        logger.LogInformation("Exiting GetFreeSlots");
 
         await Send.OkAsync(CreateDemoRequest(), ct);
     }

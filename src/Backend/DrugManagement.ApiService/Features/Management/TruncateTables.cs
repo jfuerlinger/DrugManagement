@@ -29,7 +29,7 @@ internal sealed class DeleteData(
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        logger.LogInformation($"Entered DeleteData ...");
+        logger.LogInformation("Entered DeleteData ...");
 
         var strategy = dbContext.Database.CreateExecutionStrategy();
         await strategy.ExecuteAsync(async () =>
@@ -43,7 +43,7 @@ internal sealed class DeleteData(
             await transaction.CommitAsync(ct);
         });
 
-        logger.LogInformation($"Exiting DeleteData");
+        logger.LogInformation("Exiting DeleteData");
 
         await Send.OkAsync(cancellation: ct);
     }
