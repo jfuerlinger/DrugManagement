@@ -27,7 +27,7 @@ internal sealed class GetWeatherForecast(ILogger<GetWeatherForecast> logger)
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        logger.LogInformation($"Entered GetFreeSlots ...");
+        logger.LogInformation("Entered GetFreeSlots ...");
 
         // do something
         var summaries = new[]
@@ -47,7 +47,7 @@ internal sealed class GetWeatherForecast(ILogger<GetWeatherForecast> logger)
         
 
 
-        logger.LogInformation($"Exiting GetFreeSlots");
+        logger.LogInformation("Exiting GetFreeSlots");
 
         await Send.OkAsync(forecast, ct);
     }

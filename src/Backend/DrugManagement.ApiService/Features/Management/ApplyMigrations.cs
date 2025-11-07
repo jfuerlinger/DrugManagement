@@ -30,7 +30,7 @@ internal sealed class ApplyMigrations(
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        logger.LogInformation($"Entered ApplyMigrations ...");
+        logger.LogInformation("Entered ApplyMigrations ...");
 
         var strategy = dbContext.Database.CreateExecutionStrategy();
         await strategy.ExecuteAsync(async (ct) =>
@@ -39,7 +39,7 @@ internal sealed class ApplyMigrations(
             await dbContext.Database.MigrateAsync(ct);
         }, ct);
 
-        logger.LogInformation($"Exiting ApplyMigrations");
+        logger.LogInformation("Exiting ApplyMigrations");
 
         await Send.OkAsync(cancellation: ct);
     }

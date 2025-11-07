@@ -26,11 +26,11 @@ internal sealed class BookAppointment(
 
     public override async Task HandleAsync(BookSlotRequest request, CancellationToken ct)
     {
-        logger.LogInformation($"Entered BookSlot ...");
+        logger.LogInformation("Entered BookSlot ...");
         
         await bookingService.BookAppointmentAsync(request.From);
 
-        logger.LogInformation($"Exiting BookSlot");
+        logger.LogInformation("Exiting BookSlot");
 
         await Send.OkAsync(cancellation: ct);
     }

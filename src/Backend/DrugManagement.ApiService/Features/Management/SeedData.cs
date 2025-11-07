@@ -31,7 +31,7 @@ internal sealed class SeedData(
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        logger.LogInformation($"Entered SeedData ...");
+        logger.LogInformation("Entered SeedData ...");
 
         var strategy = dbContext.Database.CreateExecutionStrategy();
         await strategy.ExecuteAsync(async (ct) =>
@@ -44,7 +44,7 @@ internal sealed class SeedData(
             await transaction.CommitAsync(ct);
         }, ct);
 
-        logger.LogInformation($"Exiting SeedData");
+        logger.LogInformation("Exiting SeedData");
 
         await Send.OkAsync(cancellation: ct);
     }
