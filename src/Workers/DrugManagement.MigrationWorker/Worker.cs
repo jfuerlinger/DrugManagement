@@ -37,11 +37,8 @@ public class Worker(
     private static async Task RunMigrationAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
     {
         var strategy = dbContext.Database.CreateExecutionStrategy();
-        await strategy.ExecuteAsync(async (ct) =>
-        {
-            // Run migration in a transaction to avoid partial migration if it fails.
-            await dbContext.Database.MigrateAsync(ct);
-        }, cancellationToken);
+        await strategy.ExecuteAsync(async (ct) => // Run migration in a transaction to avoid partial migration if it fails.
+await dbContext.Database.MigrateAsync(ct), cancellationToken);
     }
 
     private static async Task SeedDataAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)

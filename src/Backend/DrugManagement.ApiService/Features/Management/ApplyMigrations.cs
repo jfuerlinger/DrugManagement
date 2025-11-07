@@ -33,11 +33,8 @@ internal sealed class ApplyMigrations(
         logger.LogInformation($"Entered ApplyMigrations ...");
 
         var strategy = dbContext.Database.CreateExecutionStrategy();
-        await strategy.ExecuteAsync(async (ct) =>
-        {
-            // Run migration in a transaction to avoid partial migration if it fails.
-            await dbContext.Database.MigrateAsync(ct);
-        }, ct);
+        await strategy.ExecuteAsync(async (ct) => // Run migration in a transaction to avoid partial migration if it fails.
+await dbContext.Database.MigrateAsync(ct), ct);
 
         logger.LogInformation($"Exiting ApplyMigrations");
 
