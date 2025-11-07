@@ -370,7 +370,7 @@ export class DrugFormComponent implements OnInit {
   showShopForm = false;
 
   ngOnInit() {
-    this.isEditMode = !!this.drug;
+    this.isEditMode = Boolean(this.drug);
     this.loadShops();
     this.initializeForm();
   }
@@ -419,7 +419,7 @@ export class DrugFormComponent implements OnInit {
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.drugForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched));
+    return Boolean(field && field.invalid && (field.dirty || field.touched));
   }
 
   onSubmit() {

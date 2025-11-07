@@ -1222,7 +1222,7 @@ export class AppointmentFormComponent implements OnInit {
 
   isFieldInvalid(fieldName: string): boolean {
     const field = this.appointmentForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched));
+    return Boolean(field && field.invalid && (field.dirty || field.touched));
   }
 
   getFieldError(fieldName: string): string {
